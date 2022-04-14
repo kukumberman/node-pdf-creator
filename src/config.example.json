@@ -1,0 +1,78 @@
+{
+  "output": "./document-example.pdf",
+  "profile": {
+    "links": [
+      "https://example.com/your_profile",
+      "https://example.com/another_profile"
+    ],
+    "date": "4/14/2022"
+  },
+  "avatar": {
+    "src": "./resources/images/avatar_cat_dids.jpg",
+    "type": "circle",
+    "radius": 200
+  },
+  "fonts": {
+    "default": {
+      "name": "Regular",
+      "src": "./resources/fonts/Jost-Regular.ttf"
+    },
+    "bold": {
+      "name": "Bold",
+      "src": "./resources/fonts/Jost-Bold.ttf"
+    }
+  },
+  "sections": [
+    {
+      "header": "Header 1",
+      "projects": [
+        {
+          "name": "Foo",
+          "links": [
+            "https://example.com/foo"
+          ]
+        },
+        {
+          "name": "Bar",
+          "links": [
+            "https://example.com/bar"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "Header 2",
+      "projects": [
+        {
+          "name": "Foo 1",
+          "links": [
+            "https://example.com/foo1"
+          ]
+        },
+        {
+          "name": "Bar 1",
+          "links": [
+            "https://example.com/bar1"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "Header 3",
+      "projects": [
+        {
+          "name": "Foo 2",
+          "links": [
+            "https://example.com/foo2"
+          ]
+        },
+        {
+          "name": "Bar 2",
+          "links": [
+            "https://example.com/bar2"
+          ]
+        }
+      ]
+    }
+  ]
+}
