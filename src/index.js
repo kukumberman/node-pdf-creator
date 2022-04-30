@@ -98,7 +98,7 @@ function profileLinks() {
     .fillColor("black")
     .font(fonts.bold)
     .fontSize(16)
-    .text("List of projects", { align: "center" })
+    .text("List of gamedev projects", { align: "center" })
     
   const relevantDate = new Date(config.profile.date)
   const month = relevantDate.toLocaleString("en", { month: "long" })
@@ -107,7 +107,7 @@ function profileLinks() {
   doc
     .font(fonts.default)
     .fontSize(14)
-    .text(`Relevant at ${month} of ${year}`, { align: "center" })
+    // .text(`Relevant at ${month} of ${year}`, { align: "center" })
 
   config.sections.forEach(section => {
     doc
