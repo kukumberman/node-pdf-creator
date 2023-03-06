@@ -4,8 +4,7 @@
     "links": [
       "https://example.com/your_profile",
       "https://example.com/another_profile"
-    ],
-    "date": "4/14/2022"
+    ]
   },
   "avatar": {
     "src": "./resources/images/avatar_cat_dids.jpg",
@@ -25,6 +24,7 @@
   "sections": [
     {
       "header": "Header 1",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       "projects": [
         {
           "name": "Foo",

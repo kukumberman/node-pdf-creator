@@ -2,8 +2,6 @@ const fs = require("fs")
 const path = require("path")
 const PDFDocument = require("pdfkit")
 
-const config = require("./config.json")
-
 const PROJECT_LINK = "https://github.com/kukumberman/node-pdf-creator"
 
 const fonts = {
@@ -11,9 +9,18 @@ const fonts = {
   bold: "Bold"
 }
 
+const config = readConfig()
 const doc = new PDFDocument({ bufferPages: true })
 
-doc.pipe(fs.createWriteStream(config.output))
+function readConfig() {
+  const configName = process.argv.includes("--example") ? "config.example.json" : "config.json"
+  const pathToConfig = path.resolve("src", configName)
+  if (!fs.existsSync(pathToConfig)) {
+    throw new Error(`Config file does not exist at path ${pathToConfig}`)
+  }
+  const jsonText = fs.readFileSync(pathToConfig)
+  return JSON.parse(jsonText)
+}
 
 function loadFonts() {
   Object.entries(config.fonts).forEach(([k, v]) => {
@@ -24,9 +31,9 @@ function loadFonts() {
 
 function setMetadata() {
   doc.info.Author = "kukumberman"
-  doc.info.Title = "😎"
+  doc.info.Title = ""
   doc.info.Creator = PROJECT_LINK
-  doc.info.Subject = "List of projects"
+  doc.info.Subject = ""
 }
 
 function addProjects(section) {
@@ -35,6 +42,15 @@ function addProjects(section) {
     .font(fonts.bold)
     .text(section.header, { align: "center", destination: section.header })
     .moveDown()
+
+  if (typeof section.description === "string" && section.description.length > 0) {
+    doc
+      .fillColor("black")
+      .fontSize(14)
+      .font(fonts.default)
+      .text(section.description)
+      .moveDown(1.5)
+  }
 
   section.projects.forEach(project => {
     doc
@@ -98,16 +114,11 @@ function profileLinks() {
     .fillColor("black")
     .font(fonts.bold)
     .fontSize(16)
-    .text("List of gamedev projects", { align: "center" })
+    .text("Portfolio", { align: "center" })
     
-  const relevantDate = new Date(config.profile.date)
-  const month = relevantDate.toLocaleString("en", { month: "long" })
-  const year = relevantDate.getFullYear()
-
   doc
     .font(fonts.default)
     .fontSize(14)
-    // .text(`Relevant at ${month} of ${year}`, { align: "center" })
 
   config.sections.forEach(section => {
     doc
@@ -141,6 +152,8 @@ function addPageNumbers() {
 }
 
 function main() {
+  doc.pipe(fs.createWriteStream(config.output))
+
   setMetadata()
   loadFonts()
 
