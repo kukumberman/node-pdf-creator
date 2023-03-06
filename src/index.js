@@ -12,6 +12,10 @@ const fonts = {
 const config = readConfig()
 const doc = new PDFDocument({ bufferPages: true })
 
+/**
+ * 
+ * @returns { import("./types").Config }
+ */
 function readConfig() {
   const configName = process.argv.includes("--example") ? "config.example.json" : "config.json"
   const pathToConfig = path.resolve("src", configName)
@@ -36,6 +40,10 @@ function setMetadata() {
   doc.info.Subject = ""
 }
 
+/**
+ * 
+ * @param { import("./types").Section } section 
+ */
 function addProjects(section) {
   doc
     .fontSize(16)
